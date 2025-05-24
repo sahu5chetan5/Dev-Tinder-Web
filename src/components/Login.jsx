@@ -19,26 +19,27 @@ export const Login = () => {
      
 
       const handleLogin = async()=>{
-        
         try{
-          const res = await axios.post(
+          // First login to get the session
+          await axios.post(
             BASE_URL+"/login",{
             emailId,
             password
           },{
             withCredentials:true
           });
-          dispatch(addUser(res.data))
+
+          // Then fetch complete profile data
+          const profileRes = await axios.get(BASE_URL+"/profile/view", {
+            withCredentials: true
+          });
+          
+          dispatch(addUser(profileRes.data))
           return navigate("/")
-            
         }
         catch(err){
           setError(err?.response?.data||"Something went wrong")
-        
-
-
         }
-           
       }
 
       const handleSignUp = async()=>{
