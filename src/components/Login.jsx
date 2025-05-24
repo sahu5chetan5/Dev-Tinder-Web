@@ -29,7 +29,6 @@ export const Login = () => {
 
       if (response.data.token) {
         // Set token in cookie
-        document.cookie = `token=${response.data.token}; path=/; max-age=86400; SameSite=Lax`;
         
         // Add user to Redux store
         dispatch(addUser(response.data.user));
@@ -60,8 +59,6 @@ export const Login = () => {
 
       if (response.data.token) {
         // Set token in cookie
-        document.cookie = `token=${response.data.token}; path=/; max-age=86400; SameSite=Lax`;
-        
         // Add user to Redux store
         dispatch(addUser(response.data.user));
         navigate("/");
